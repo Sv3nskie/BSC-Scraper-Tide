@@ -2,7 +2,7 @@ import Web3 from 'web3';
 import Config from './config.js';
 import errorHandler from '../errorHandler.js';
 
-const {rpc2, factoryABI, pairABI, factory, bitqueryKey} = Config();
+const {rpc2, factoryABI, pairABI, factory} = Config();
 const web3RPC2 = new Web3(rpc2);
 
 
@@ -79,9 +79,9 @@ export async function getSymbol(address){ // get name, symbol, decimals, supply
  */
 export async function getTimestamp(blockNumber){ // turn block number into timestamp
     return new Promise((resolve, reject)=>{
-        const block = 20206725;
-        const blockTime = 1659797577;
-        const add = (blockNumber - block) * 3000;
+        const block = 20318924;
+        const blockTime = 1660134620;
+        const add = (blockNumber - block) * 3;
         const newTime = blockTime + add;
 
         return resolve({timestamp: newTime});

@@ -6,9 +6,12 @@ export function saveTX(data){
     try{
         const newTX = new tx(data);
         newTX.save((err)=>{
-            if(err) return console.log(err);
+            if(err){
+                if(err.code == 11000) return;
+                return console.log(err.code)
+            };
         });
     } catch(err){
-        errorHandler({'file': 'txController.js', 'function': 'saveTX', error: err});
+        return errorHandler({'file': 'txController.js', 'function': 'saveTX', error: err});
     };
 };

@@ -26,7 +26,7 @@ let sync = {
 };
 
 function startup(){
-    web3Socket1.eth.subscribe('logs', {
+    const subscription = web3Socket1.eth.subscribe('logs', {
         topics: [
             [swapEvent, syncEvent] // TODO: add Transfer event to track Burn/Mint
         ]

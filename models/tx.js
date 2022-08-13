@@ -50,6 +50,7 @@ const txSchema = new mongoose.Schema({
     block:{
         type: Number,
         required: true,
+        index: true,
     },
     timestamp:{
         type: Number,
@@ -71,6 +72,21 @@ const txSchema = new mongoose.Schema({
     },
     stable:{
         type: Boolean,
+    },
+    type:{
+        type: String,
+    },
+    baseAmount:{
+        type: String,
+    },
+    quoteAmount:{
+        type: String,
+    },
+    conversionRate:{
+        type: String,
+    },
+    newPrice:{
+        type: String,
     },
 },{collection: 'tx', timestamps: true});
 

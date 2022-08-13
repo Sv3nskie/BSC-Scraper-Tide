@@ -7,7 +7,7 @@ import {findToken, saveToken} from './controllers/tokenController.js';
 import {baseToken, getDecimals, getSupply, getName} from './components/nodeRequests.js';
 import errorHandler from './errorHandler.js';
 
-const {database, stable} = Config();
+const {database, stableToken} = Config();
 
 let sequencer = Promise.resolve();
 let pairs = [] // {pairAddress, decimals, stable, base0, baseToken}
@@ -25,7 +25,7 @@ const createNewToken = (address, symbol)=>{
                     name: name,
                     symbol: symbol,
                     decimals: decimals,
-                    supply: supply,
+                    supply: (supply / (10 ** decimals)),
                     network: 'BSC',
                 };
         
@@ -51,8 +51,8 @@ const createNewPair = (data)=>{
                 const setPair = {
                     pairAddress: data[5], 
                     baseDecimals: decimals, 
-                    stable: data[3] == stable ? true : false, 
-                    base0: base == data[5] ? true : false, 
+                    stable: data[3] == stableToken ? true : false, 
+                    base0: base == data[1] ? true : false, 
                     baseToken: data[1]
                 };
 
@@ -63,8 +63,8 @@ const createNewPair = (data)=>{
                     name: data[4], 
                     baseToken: data[1], 
                     quoteToken: data[3], 
-                    base0: base == data[5] ? true : false, // call function to get boolean
-                    stable: data[3] == stable ? true : false,
+                    base0: base == data[1] ? true : false, // call function to get boolean
+                    stable: data[3] == stableToken ? true : false,
                     baseDecimals: decimals,
                 };
 

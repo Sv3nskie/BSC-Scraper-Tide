@@ -5,8 +5,9 @@ import errorHandler from '../errorHandler.js';
 import SaveBasePrice from './saveBasePrice.js';
 
 
-const {socket2, router, basePair} = Config();
-const web3Socket1 = new Web3(socket2);
+const {socket1, socket2, router, basePair} = Config();
+
+const web3Socket1 = new Web3(socket1);
 const web3 = new Web3();
 const Router = web3.eth.abi.encodeParameter('address', router);
 const swapEvent = web3.utils.sha3('Swap(address,uint256,uint256,uint256,uint256,address)'); // pancakeswap swap event
@@ -60,15 +61,14 @@ function startup(){
                 ProcessSwap(logData, exists);
             };
         };
-        
     }).on('error', (err)=>{
         subscription.unsubscribe((err, success)=>{
-            if(success){
+            if(err){
                 startup();
-            } if(err){
                 return errorHandler({'file': 'scraper.js', 'function': 'startup', error: err});
             };
         });
+        startup();
         return errorHandler({'file': 'scraper.js', 'function': 'startup', error: err});
     });
 };

@@ -9,6 +9,8 @@ dotenv.config();
 const data = {
     database: process.env.DATABASE,
     getblockKey: process.env.GETBLOCK_KEY,
+    rpc1: process.env.RPC,
+    socket1: process.env.SOCKET,
     rpc2: process.env.NODEREAL_RPC,
     socket2: process.env.NODEREAL_SOCKET,
     tokenABI: tokenABI(),

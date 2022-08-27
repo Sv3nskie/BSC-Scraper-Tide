@@ -71,7 +71,7 @@ export default function ProcessSwap(logData, pair, reserve){
                 newPrice: p.toString().includes('e-') ? priceNewCon : p.toString(),
             };
 
-            // console.log(tx)
+            console.log(tx)
             saveTX(tx);
             
         }).catch(err=>{

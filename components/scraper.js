@@ -5,9 +5,9 @@ import errorHandler from '../errorHandler.js';
 import SaveBasePrice from './saveBasePrice.js';
 
 
-const {socket1, socket2, router, basePair} = Config();
+const {socket, router, basePair} = Config();
 
-const web3Socket1 = new Web3(socket1);
+const web3Socket1 = new Web3(socket);
 const web3 = new Web3();
 const Router = web3.eth.abi.encodeParameter('address', router);
 const swapEvent = web3.utils.sha3('Swap(address,uint256,uint256,uint256,uint256,address)'); // pancakeswap swap event

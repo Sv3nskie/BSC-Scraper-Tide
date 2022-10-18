@@ -2,13 +2,11 @@ import Web3 from 'web3';
 import {getSync, getTimestamp} from './nodeRequests.js'
 import {saveTX} from '../controllers/txController.js';
 import errorHandler from '../errorHandler.js';
-import Config from './config.js';
 
-const {basePair} = Config();
 
 const web3 = new Web3();
 
-export default function ProcessSwap(logData, pair, reserve){
+export default function ProcessSwap(logData, pair, reserve, history, callback){
     try{
         const {topics, logIndex, blockNumber, transactionHash, data} = logData;
         const {pairAddress, baseDecimals, stable, base0, baseToken} = pair;
@@ -71,8 +69,12 @@ export default function ProcessSwap(logData, pair, reserve){
                 newPrice: p.toString().includes('e-') ? priceNewCon : p.toString(),
             };
 
-            console.log(tx)
-            saveTX(tx);
+            saveTX(tx, ()=>{
+                if(history){
+                    return callback();
+                };
+                return;
+            });
             
         }).catch(err=>{
             return errorHandler({'file': 'processSwap.js', 'function': 'ProcessSwap', error: err});

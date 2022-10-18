@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import Config from './config.js';
+import Config from '../config.js';
 import errorHandler from '../errorHandler.js';
 
 const {rpc, factoryABI, pairABI, factory} = Config();
@@ -171,5 +171,22 @@ export function baseToken(address){ // token0 token1 ? from pair contract
     } catch(err){
         resolve();
         return errorHandler({'file': 'nodeRequests.js', 'function': 'baseToken', error: err});
+    };
+};
+
+
+/**
+ * @param {string} network
+ * @returns timastamp of latest block in the node
+ */
+ export async function LastBlockTime(){
+    try{
+        const number = await web3RPC2.eth.getBlockNumber();
+        const block = await web3RPC2.eth.getBlock(number);
+
+        return block.timestamp;
+    } catch(err){
+        errorHandler({'file': 'nodeRequests.js', 'function': 'LastBlockTime', error: err});
+        return false;
     };
 };

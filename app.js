@@ -1,17 +1,20 @@
 import mongoose from 'mongoose';
 import Scraper from './components/scraper.js'
-import Config from './components/config.js'
+import Config from './config.js'
 import { getSheet } from './components/drive.js';
 import {getPairs, savePair} from './controllers/pairController.js';
 import {findToken, saveToken} from './controllers/tokenController.js';
-import {baseToken, getDecimals, getSupply, getName} from './components/nodeRequests.js';
+import {baseToken, getDecimals, getSupply, getName, LastBlockTime} from './components/nodeRequests.js';
 import errorHandler from './errorHandler.js';
 
-const {database, stableToken} = Config();
+
+const {database, stableToken, local_database} = Config();
+
 
 let sequencer = Promise.resolve();
 let pairs = [] // {pairAddress, decimals, stable, base0, baseToken}
 let tokens = []; // just to make sure we not try too save double tokens
+
 
 const createNewToken = (address, symbol)=>{
     return new Promise(async(resolve, reject)=>{
@@ -81,7 +84,7 @@ const createNewPair = (data)=>{
     };
 };
 
-mongoose.connect(database);
+mongoose.connect(local_database);
 mongoose.connection.on('error', err => {
     errorHandler({'file': 'app.js', 'function': 'databaseConnect', error: err});
 }).on('connected', async()=>{

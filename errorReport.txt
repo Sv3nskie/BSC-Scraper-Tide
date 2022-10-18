@@ -1,0 +1,22 @@
+Mon Oct 17 2022 17:43:54 GMT+0700 (Western Indonesia Time): - {
+  file: 'scraper-BSC.js',
+  function: 'setInterval',
+  error: ReferenceError: rpc_BSC is not defined
+      at LastBlockTime (file:///C:/Users/hp/Documents/Sv3n/Work/Josh%20-%20Tide/app/BSC-Scraper-Tide/components/nodeRequests.js:183:36)
+      at Timeout._onTimeout (file:///C:/Users/hp/Documents/Sv3n/Work/Josh%20-%20Tide/app/BSC-Scraper-Tide/components/scraper.js:90:33)
+      at listOnTimeout (node:internal/timers:557:17)
+      at processTimers (node:internal/timers:500:7)
+}
+ ---- 
+Mon Oct 17 2022 17:55:17 GMT+0700 (Western Indonesia Time): - {
+  file: 'scraper-BSC.js',
+  function: 'history',
+  error: Error: Provider not set or invalid
+      at Object.InvalidProvider (C:\Users\hp\Documents\Sv3n\Work\Josh - Tide\app\BSC-Scraper-Tide\node_modules\web3-core-helpers\lib\errors.js:39:16)
+      at RequestManager.send (C:\Users\hp\Documents\Sv3n\Work\Josh - Tide\app\BSC-Scraper-Tide\node_modules\web3-core-requestmanager\lib\index.js:145:32)
+      at sendRequest (C:\Users\hp\Documents\Sv3n\Work\Josh - Tide\app\BSC-Scraper-Tide\node_modules\web3-core-method\lib\index.js:629:42)
+      at Eth.send [as getPastLogs] (C:\Users\hp\Documents\Sv3n\Work\Josh - Tide\app\BSC-Scraper-Tide\node_modules\web3-core-method\lib\index.js:661:13)
+      at history (file:///C:/Users/hp/Documents/Sv3n/Work/Josh%20-%20Tide/app/BSC-Scraper-Tide/components/scraper.js:118:14)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+}
+ ---- 
